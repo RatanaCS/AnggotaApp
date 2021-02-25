@@ -2,6 +2,8 @@ package com.sumuzu.anggotaapp.config
 
 import com.sumuzu.anggotaapp.model.ResponseAction
 import com.sumuzu.anggotaapp.model.getData.ResponseGetData
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -10,7 +12,7 @@ interface ApiService {
 
     //getData
     @GET("getData.php")
-    fun getData() : Call<ResponseGetData>
+    fun getData() : Flowable<ResponseGetData>
 
     //getDatabyId
     @GET("getData.php?id=")
@@ -22,7 +24,7 @@ interface ApiService {
     fun insertData(@Field("nama") nama : String,
                     @Field("nohp") nohp : String,
                    @Field("alamat") alamat : String
-    ) : Call<ResponseAction>
+    ) : Single<ResponseAction>
 
     //update
     @FormUrlEncoded
@@ -31,12 +33,12 @@ interface ApiService {
                    @Field("nama") nama : String,
                    @Field("nohp") nohp : String,
                    @Field("alamat") alamat : String
-    ) : Call<ResponseAction>
+    ) : Single<ResponseAction>
 
     //delete
     @FormUrlEncoded
     @POST("delete.php")
     fun deleteData(@Field("id") id : String
-    ) : Call<ResponseAction>
+    ) : Single<ResponseAction>
 
 }
